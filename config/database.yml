@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: ifriend_dev
+  username: local_root
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: ifriend_test
+  username: local_root
+  pool: 5
+  timeout: 5000

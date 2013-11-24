@@ -1,0 +1,30 @@
+body {
+  padding-top:20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+#hola {
+  display: none;
+}
+
+#result {
+  display: none;
+}
+
+#content {
+  margin: 0 auto 0 auto;
+  text-align: center;
+  display: inline;
+}
+
+#search {
+  display: none;
+}
+
+.hat {
+  float: left;
+}
+
