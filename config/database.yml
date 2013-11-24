@@ -13,3 +13,12 @@ test:
   username: local_root
   pool: 5
   timeout: 5000
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: ifriend
+  username: local_root
+  pool: 5
+  timeout: 5000
+

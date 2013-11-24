@@ -1,48 +1,3 @@
-##
-# You can use other adapters like:
-#
-#   ActiveRecord::Base.configurations[:development] = {
-#     :adapter   => 'mysql2',
-#     :encoding  => 'utf8',
-#     :reconnect => true,
-#     :database  => 'your_database',
-#     :pool      => 5,
-#     :username  => 'root',
-#     :password  => '',
-#     :host      => 'localhost',
-#     :socket    => '/tmp/mysql.sock'
-#   }
-#
-ActiveRecord::Base.configurations[:development] = {
-  :adapter   => 'postgresql',
-  :database  => 'ifriend_development',
-  :username  => 'root',
-  :password  => '',
-  :host      => 'localhost',
-  :port      => 5432
-
-}
-
-ActiveRecord::Base.configurations[:production] = {
-  :adapter   => 'postgresql',
-  :database  => 'ifriend_development',
-  :username  => 'root',
-  :password  => '',
-  :host      => 'localhost',
-  :port      => 5432
-
-}
-
-ActiveRecord::Base.configurations[:test] = {
-  :adapter   => 'postgresql',
-  :database  => 'invisiblefriend_test',
-  :username  => 'root',
-  :password  => '',
-  :host      => 'localhost',
-  :port      => 5432
-
-}
-
 # Setup our logger
 ActiveRecord::Base.logger = logger
 
@@ -67,6 +22,6 @@ ActiveSupport.use_standard_json_time_format = true
 ActiveSupport.escape_html_entities_in_json = false
 
 # Now we can establish connection with our db.
-dbconfig = YAML::load(File.open(PADRINO_ROOT + '/config/database.yml'))
+dbconfig = HashWithIndifferentAccess.new(YAML::load(File.open(PADRINO_ROOT + '/config/database.yml')) )
 ActiveRecord::Base.configurations = dbconfig
-ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations[Padrino.env.to_s])
+ActiveRecord::Base.establish_connection(dbconfig[Padrino.env])
