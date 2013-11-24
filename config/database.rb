@@ -1,3 +1,30 @@
+ActiveRecord::Base.configurations[:development] = {
+  :adapter   => 'postgresql',
+  :database  => 'ifriend_dev',
+  :username  => 'local_root',
+  :encoding   => 'unicode'
+}
+
+ActiveRecord::Base.configurations[:production] = {
+  :adapter   => 'postgresql',
+  :database  => 'ifriend_development',
+  :username  => 'root',
+  :password  => '',
+  :host      => 'localhost',
+  :port      => 5432
+
+}
+
+ActiveRecord::Base.configurations[:test] = {
+  :adapter   => 'postgresql',
+  :database  => 'invisiblefriend_test',
+  :username  => 'root',
+  :password  => '',
+  :host      => 'localhost',
+  :port      => 5432
+
+}
+
 # Setup our logger
 ActiveRecord::Base.logger = logger
 
@@ -22,6 +49,6 @@ ActiveSupport.use_standard_json_time_format = true
 ActiveSupport.escape_html_entities_in_json = false
 
 # Now we can establish connection with our db.
-dbconfig = HashWithIndifferentAccess.new(YAML::load(File.open(PADRINO_ROOT + '/config/database.yml')) )
+dbconfig = YAML::load(File.open(PADRINO_ROOT + '/config/database.yml'))
 ActiveRecord::Base.configurations = dbconfig
-ActiveRecord::Base.establish_connection(dbconfig[Padrino.env])
+ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations[Padrino.env.to_s])
